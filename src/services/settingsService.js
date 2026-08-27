@@ -1,13 +1,17 @@
+import { brandService } from './brandService';
+
+const company = brandService.getCompanyProfile();
+
 export const INITIAL_SITE_SETTINGS = {
-  company_name: 'Tejas & Company',
+  company_name: company.brand_name || 'Tejas & Company',
   website_domain: 'tejasandcompany.in',
-  contact_email: 'info@tejasandcompany.in',
-  sales_phone: '+91-98765 43210',
-  whatsapp_number: '919876543210',
-  factory_address: 'Dehradun Industrial Estate, Uttarakhand, India',
-  gstin: '05AAACT1234F1Z9',
-  default_seo_title: 'Tejas & Company • Commercial Kitchen & Food Processing Machinery',
-  default_meta_description: 'Official 23 products catalog across 9 main categories: Apple Grading, Pulverizers, Cold Press Oil Expeller, Canning Retort & SS 304 Kitchen Equipment.'
+  contact_email: company.official_email || 'info@tejasandcompany.in',
+  sales_phone: company.sales_phone || '+91 98765 43210',
+  whatsapp_number: company.whatsapp_number || '919876543210',
+  factory_address: `${company.address}, ${company.city}, ${company.state}`,
+  gstin: company.gstin || '05AAACT1234F1Z9',
+  default_seo_title: `${company.brand_name} • Commercial Kitchen & Food Processing Machinery`,
+  default_meta_description: company.tagline || 'Official products catalog across food processing, pulverizers, cold press oil expellers & stainless steel kitchen equipment.'
 };
 
 export const settingsService = {
