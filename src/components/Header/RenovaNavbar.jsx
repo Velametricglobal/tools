@@ -8,7 +8,8 @@ import {
   Menu,
   ArrowRight,
   ShieldCheck,
-  Sparkles
+  Sparkles,
+  ChevronDown
 } from 'lucide-react';
 import { useRenova } from '../../context/RenovaContext';
 
@@ -71,21 +72,22 @@ export const RenovaNavbar = () => {
       <div className="h-1 bg-gradient-to-r from-slate-900 via-sky-500 to-slate-900 w-full" />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 font-sans">
-        <div className="flex items-center justify-between gap-3 sm:gap-6">
+        <div className="flex items-center justify-between gap-2 sm:gap-6">
           
-          {/* Left: Hamburger & Brand Header */}
-          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          {/* Left: Hamburger, Mobile Quick Dropdown & Desktop Header */}
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0 min-w-0">
             {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors shrink-0"
               title="Open Navigation Menu"
             >
               <Menu className="w-5 h-5" />
             </button>
 
-            {/* Brand Logo & "DEMO CRM FOR E-COMMERCE BUSINESS" Text */}
-            <a href="#" className="flex items-center gap-3 group">
+            {/* Brand Section: Logo hidden on mobile (hidden sm:block), replaced by Mobile Header Dropdown Menu (sm:hidden) */}
+            <div className="flex items-center gap-3">
+              {/* Logo: Hidden on mobile (sm:hidden), visible on sm+ */}
               <img
                 src={logos.primary_logo || FALLBACK_LOGO}
                 alt="Velametric Global Logo"
@@ -93,7 +95,8 @@ export const RenovaNavbar = () => {
                   e.target.onerror = null;
                   e.target.src = FALLBACK_LOGO;
                 }}
-                className="object-contain transition-transform duration-200 group-hover:scale-102"
+                className="hidden sm:block object-contain transition-transform duration-200 hover:scale-102 cursor-pointer"
+                onClick={() => setSelectedCategory('all')}
                 style={{
                   width: `${logoWidth}px`,
                   height: `${logoHeight}px`,
@@ -102,21 +105,55 @@ export const RenovaNavbar = () => {
                 }}
               />
 
-              <div className="flex flex-col">
+              {/* Desktop Header Text (sm:block) */}
+              <div className="hidden sm:flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm sm:text-base font-black tracking-tight uppercase leading-none text-slate-900 font-sans group-hover:text-sky-600 transition-colors">
+                  <span className="text-sm sm:text-base font-black tracking-tight uppercase leading-none text-slate-900 font-sans">
                     DEMO CRM FOR E-COMMERCE BUSINESS
                   </span>
-                  <span className="hidden xs:inline-flex items-center gap-1 bg-gradient-to-r from-sky-400 to-sky-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider shrink-0 shadow-2xs">
+                  <span className="hidden md:inline-flex items-center gap-1 bg-gradient-to-r from-sky-400 to-sky-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider shrink-0 shadow-2xs">
                     <Sparkles className="w-2.5 h-2.5 text-slate-950" />
                     <span>CLIENT DEMO</span>
                   </span>
                 </div>
-                <span className="text-[10px] font-bold text-slate-500 tracking-wider uppercase hidden sm:block truncate max-w-[340px] mt-0.5">
+                <span className="text-[10px] font-bold text-slate-500 tracking-wider uppercase truncate max-w-[340px] mt-0.5">
                   Via Velametric Global • We Create. We Market. We Grow
                 </span>
               </div>
-            </a>
+
+              {/* Mobile Header Quick Dropdown Menu (sm:hidden - Replaces logo on mobile screens) */}
+              <div className="flex sm:hidden flex-col min-w-0 max-w-[195px] xs:max-w-[230px]">
+                <span className="text-[11px] font-black tracking-tight uppercase leading-tight text-slate-900 truncate">
+                  DEMO CRM E-COMMERCE
+                </span>
+
+                {/* Mobile Dropdown Quick Selector */}
+                <div className="mt-1 relative">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full bg-slate-950 text-sky-400 font-extrabold text-[10px] py-1 px-2.5 rounded-lg appearance-none outline-none border border-slate-800 pr-6 uppercase tracking-wider cursor-pointer shadow-2xs truncate"
+                  >
+                    <option value="all">⚡ Select Category ▼</option>
+                    <option value="all">All 23 Demo Items</option>
+                    <option value="fruit-veg-processing">Fruit & Veg Processing</option>
+                    <option value="pulverizer-grinding">Pulverizers & Mills</option>
+                    <option value="packaging-machines">Packaging Lines</option>
+                    <option value="industrial-utility">Industrial Utility</option>
+                    <option value="food-preservation">Canning Retorts</option>
+                    <option value="oil-processing">Cold Press Oil Expeller</option>
+                    <option value="drying-machines">Tray Dryers</option>
+                    <option value="liquid-processing">Liquid Filling & RO</option>
+                    <option value="roasting-machines">Tilting Drum Roaster</option>
+                    <option value="wishlist">Saved Wishlist Items</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-1.5 flex items-center px-1 text-sky-400">
+                    <ChevronDown className="w-3 h-3" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
           {/* Desktop Search Bar */}
@@ -186,7 +223,7 @@ export const RenovaNavbar = () => {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             
             {/* Mobile Search Toggle */}
             <button
@@ -214,7 +251,7 @@ export const RenovaNavbar = () => {
             {/* RFQ Quote List Drawer Button */}
             <button
               onClick={() => setIsRFQDrawerOpen(true)}
-              className="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl flex items-center gap-2.5 shadow-xs transition-all hover:shadow-md group"
+              className="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl flex items-center gap-2.5 shadow-xs transition-all hover:shadow-md group"
             >
               <div className="relative">
                 <FileText className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-sky-400 group-hover:scale-110 transition-transform" />
