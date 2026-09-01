@@ -27,6 +27,8 @@ import { ProductsManager } from './Products/ProductsManager';
 import { CompanyBrandManager } from './CompanyBrand/CompanyBrandManager';
 import { DocumentManager } from './Documents/DocumentManager';
 
+const FALLBACK_LOGO = '/velametric-logo.png';
+
 export const ADMIN_MODULES = [
   { id: 'dashboard', label: 'Dashboard Overview', icon: LayoutDashboard },
   { id: 'company-brand', label: 'Company & Branding Kit', icon: Building2, highlight: true },
@@ -94,15 +96,16 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
             <div className="h-4 w-px bg-slate-700 hidden sm:block" />
 
             <div className="flex items-center gap-2.5">
-              {logos.primary_logo ? (
-                <img src={logos.primary_logo} alt="Velametric Logo" className="h-7 object-contain rounded-md bg-slate-900 p-0.5" />
-              ) : (
-                <div className="w-7 h-7 rounded-xl bg-sky-400 text-slate-950 font-black flex items-center justify-center text-xs shadow-xs">
-                  VG
-                </div>
-              )}
+              <img
+                src={logos.primary_logo || FALLBACK_LOGO}
+                alt="Velametric Logo"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = FALLBACK_LOGO;
+                }}
+                className="h-7 object-contain rounded-md bg-slate-900 p-0.5 border border-slate-800"
+              />
               <div>
-                {/* TEXT REQUESTED BY USER: DEMO CRM FOR E-COMMERCE BUSINESS */}
                 <span className="text-xs font-black tracking-wider uppercase block text-white flex items-center gap-2">
                   <span>DEMO CRM FOR E-COMMERCE BUSINESS</span>
                   <span className="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded-xs uppercase">

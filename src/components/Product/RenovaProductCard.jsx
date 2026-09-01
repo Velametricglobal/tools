@@ -2,6 +2,8 @@ import React from 'react';
 import { FileText, Eye, CheckCircle2, Scale, Heart, ShieldCheck } from 'lucide-react';
 import { useRenova } from '../../context/RenovaContext';
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
+
 export const RenovaProductCard = ({ product }) => {
   const {
     addToRFQ,
@@ -38,8 +40,12 @@ export const RenovaProductCard = ({ product }) => {
       {/* Product Image Container */}
       <div className="relative aspect-4/3 overflow-hidden bg-slate-100 border-b border-slate-100">
         <img
-          src={product.image}
+          src={product.image || FALLBACK_IMAGE}
           alt={product.name}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = FALLBACK_IMAGE;
+          }}
           className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
         />
 

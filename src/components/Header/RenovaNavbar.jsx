@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { useRenova } from '../../context/RenovaContext';
 
+const FALLBACK_LOGO = '/velametric-logo.png';
+
 export const RenovaNavbar = () => {
   const {
     branding,
@@ -84,23 +86,21 @@ export const RenovaNavbar = () => {
 
             {/* Brand Logo & "DEMO CRM FOR E-COMMERCE BUSINESS" Text */}
             <a href="#" className="flex items-center gap-3 group">
-              {logos.primary_logo ? (
-                <img
-                  src={logos.primary_logo}
-                  alt="Velametric Global Logo"
-                  className="object-contain transition-transform duration-200 group-hover:scale-102"
-                  style={{
-                    width: `${logoWidth}px`,
-                    height: `${logoHeight}px`,
-                    transform: `scale(${logoScale / 100})`,
-                    transformOrigin: 'center left'
-                  }}
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-xl bg-slate-950 text-sky-400 flex items-center justify-center font-black text-xs shadow-md">
-                  VG
-                </div>
-              )}
+              <img
+                src={logos.primary_logo || FALLBACK_LOGO}
+                alt="Velametric Global Logo"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = FALLBACK_LOGO;
+                }}
+                className="object-contain transition-transform duration-200 group-hover:scale-102"
+                style={{
+                  width: `${logoWidth}px`,
+                  height: `${logoHeight}px`,
+                  transform: `scale(${logoScale / 100})`,
+                  transformOrigin: 'center left'
+                }}
+              />
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">

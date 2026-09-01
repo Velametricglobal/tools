@@ -4,6 +4,8 @@ import { useRenova } from '../../context/RenovaContext';
 import { HeroSidebarMenu } from './HeroSidebarMenu';
 import { HeroSearchFilterBar } from './HeroSearchFilterBar';
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
+
 export const RenovaHero = () => {
   const { branding, setSelectedCategory, setIsQuickQuoteOpen, products, setSelectedProduct } = useRenova();
   const company = branding?.companyProfile || {};
@@ -130,8 +132,12 @@ export const RenovaHero = () => {
                   {sliderProducts.map((prod, idx) => (
                     <img
                       key={prod.id}
-                      src={prod.image}
+                      src={prod.image || FALLBACK_IMAGE}
                       alt={prod.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = FALLBACK_IMAGE;
+                      }}
                       className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
                         idx === currentSlide
                           ? 'opacity-100 scale-100 z-10'
