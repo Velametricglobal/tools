@@ -95,30 +95,34 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
 
             <div className="flex items-center gap-2.5">
               {logos.primary_logo ? (
-                <img src={logos.primary_logo} alt="Logo" className="h-7 object-contain rounded-md bg-slate-900 p-0.5" />
+                <img src={logos.primary_logo} alt="Velametric Logo" className="h-7 object-contain rounded-md bg-slate-900 p-0.5" />
               ) : (
-                <div className="w-7 h-7 rounded-xl bg-sky-500 text-slate-950 font-black flex items-center justify-center text-xs shadow-xs">
-                  V
+                <div className="w-7 h-7 rounded-xl bg-sky-400 text-slate-950 font-black flex items-center justify-center text-xs shadow-xs">
+                  VG
                 </div>
               )}
               <div>
-                <span className="text-xs font-black tracking-wider uppercase block text-white">
-                  {company.brand_name || 'Velametric Global'} Admin Console
+                {/* TEXT REQUESTED BY USER: DEMO CRM FOR E-COMMERCE BUSINESS */}
+                <span className="text-xs font-black tracking-wider uppercase block text-white flex items-center gap-2">
+                  <span>DEMO CRM FOR E-COMMERCE BUSINESS</span>
+                  <span className="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded-xs uppercase">
+                    CLIENT DEMO
+                  </span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-bold block">
-                  {company.tagline || 'Enterprise Headless CMS & CRM'}
+                  Via Velametric Global • We Create. We Market. We Grow
                 </span>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-3 text-xs">
-            <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-extrabold bg-emerald-950 text-emerald-300 border border-emerald-800 px-2.5 py-0.5 rounded-full">
-              <Shield className="w-3 h-3 text-emerald-400" />
-              <span>SUPER_ADMIN (RLS Enabled)</span>
+            <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-extrabold bg-sky-950 text-sky-300 border border-sky-800 px-2.5 py-0.5 rounded-full">
+              <Sparkles className="w-3 h-3 text-sky-400 animate-pulse" />
+              <span>VELAMETRIC GLOBAL DEMO</span>
             </span>
 
-            <div className="w-8 h-8 rounded-full bg-sky-500 text-slate-950 font-extrabold flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-sky-400 text-slate-950 font-black flex items-center justify-center text-xs">
               VG
             </div>
           </div>
@@ -133,7 +137,7 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
         <aside className="lg:col-span-3 space-y-2">
           <div className="bg-white rounded-3xl p-3 border border-slate-200 shadow-sm space-y-1">
             <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider px-3 py-2 block">
-              Admin Modules
+              Demo CRM Modules
             </span>
 
             {ADMIN_MODULES.map((mod) => {
