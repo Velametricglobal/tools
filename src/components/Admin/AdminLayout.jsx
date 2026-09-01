@@ -15,6 +15,7 @@ import {
   Building2,
   FileCheck2
 } from 'lucide-react';
+import { useRenova } from '../../context/RenovaContext';
 import { AdminDashboard } from './Dashboard/AdminDashboard';
 import { HomepageBuilder } from './HomepageBuilder/HomepageBuilder';
 import { LeadsManager } from './Leads/LeadsManager';
@@ -41,6 +42,11 @@ export const ADMIN_MODULES = [
 
 export const AdminLayout = ({ onReturnToWebsite }) => {
   const [activeModule, setActiveModule] = useState('dashboard');
+  const { branding } = useRenova() || {};
+
+  const company = branding?.companyProfile || {};
+  const tokens = branding?.brandTokens || {};
+  const logos = branding?.logos || {};
 
   const renderActiveModule = () => {
     switch (activeModule) {
@@ -73,7 +79,7 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
     <div className="min-h-screen bg-slate-100 text-slate-900 font-sans flex flex-col antialiased">
       
       {/* Master Top Bar */}
-      <header className="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50">
+      <header className="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
           
           <div className="flex items-center gap-3">
@@ -87,16 +93,20 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
 
             <div className="h-4 w-px bg-slate-700 hidden sm:block" />
 
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-xl bg-[#02408f] text-amber-300 font-black flex items-center justify-center text-xs shadow-xs">
-                T
-              </div>
+            <div className="flex items-center gap-2.5">
+              {logos.primary_logo ? (
+                <img src={logos.primary_logo} alt="Logo" className="h-7 object-contain rounded-md bg-slate-900 p-0.5" />
+              ) : (
+                <div className="w-7 h-7 rounded-xl bg-sky-500 text-slate-950 font-black flex items-center justify-center text-xs shadow-xs">
+                  V
+                </div>
+              )}
               <div>
                 <span className="text-xs font-black tracking-wider uppercase block text-white">
-                  Tejas Admin Console
+                  {company.brand_name || 'Velametric Global'} Admin Console
                 </span>
                 <span className="text-[10px] text-slate-400 font-bold block">
-                  Enterprise Headless CMS & CRM
+                  {company.tagline || 'Enterprise Headless CMS & CRM'}
                 </span>
               </div>
             </div>
@@ -108,8 +118,8 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
               <span>SUPER_ADMIN (RLS Enabled)</span>
             </span>
 
-            <div className="w-8 h-8 rounded-full bg-[#02408f] text-white font-extrabold flex items-center justify-center text-xs">
-              AD
+            <div className="w-8 h-8 rounded-full bg-sky-500 text-slate-950 font-extrabold flex items-center justify-center text-xs">
+              VG
             </div>
           </div>
 
@@ -136,14 +146,14 @@ export const AdminLayout = ({ onReturnToWebsite }) => {
                   onClick={() => setActiveModule(mod.id)}
                   className={`w-full p-2.5 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all text-left ${
                     isActive
-                      ? 'bg-[#02408f] text-white shadow-md font-extrabold'
-                      : 'text-slate-700 hover:bg-sky-50 hover:text-[#02408f]'
+                      ? 'bg-slate-900 text-white shadow-md font-extrabold'
+                      : 'text-slate-700 hover:bg-sky-50 hover:text-slate-900'
                   }`}
                 >
-                  <IconComp className={`w-4 h-4 shrink-0 ${isActive ? 'text-amber-300' : 'text-slate-500'}`} />
+                  <IconComp className={`w-4 h-4 shrink-0 ${isActive ? 'text-sky-400' : 'text-slate-500'}`} />
                   <span className="truncate">{mod.label}</span>
                   {mod.highlight && (
-                    <span className="ml-auto text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded-md">
+                    <span className="ml-auto text-[9px] bg-sky-400 text-slate-950 font-black px-1.5 py-0.2 rounded-md">
                       NEW
                     </span>
                   )}
