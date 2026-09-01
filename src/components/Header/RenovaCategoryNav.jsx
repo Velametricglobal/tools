@@ -44,36 +44,32 @@ export const RenovaCategoryNav = () => {
 
   return (
     <nav
-      className="text-white border-b shadow-md relative z-40 transition-colors"
-      style={{ backgroundColor: tokens.primary || '#02408f', borderColor: tokens.secondary || '#0f172a' }}
+      className="bg-slate-900 text-white border-b border-slate-800 shadow-md relative z-40 font-sans"
       ref={navRef}
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
         
         {/* Horizontal Category Strip */}
-        <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar py-1 text-xs">
+        <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar py-1.5 text-xs">
           
           {/* Categories Pill Strip */}
           <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
             
-            {/* All 23 Products Button */}
+            {/* All Products Button */}
             <button
               onClick={() => {
                 setSelectedCategory('all');
                 setActiveOpenCat(null);
               }}
               onMouseEnter={() => setActiveOpenCat(null)}
-              className={`px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-1.5 shrink-0 ${
+              className={`px-3 py-1.5 text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
                 selectedCategory === 'all'
-                  ? 'text-slate-950 font-black shadow-xs'
-                  : 'hover:bg-black/20 text-slate-100'
+                  ? 'bg-sky-400 text-slate-950 shadow-xs'
+                  : 'hover:bg-slate-800 text-slate-200'
               }`}
-              style={{
-                backgroundColor: selectedCategory === 'all' ? (tokens.accent || '#fbbf24') : 'transparent'
-              }}
             >
               <Zap className="w-3.5 h-3.5" />
-              <span>All Products</span>
+              <span>All Categories</span>
             </button>
 
             {/* Category Buttons */}
@@ -86,19 +82,19 @@ export const RenovaCategoryNav = () => {
                   key={category.id}
                   onClick={() => handleCategoryClick(category.id)}
                   onMouseEnter={() => setActiveOpenCat(category.id)}
-                  className={`px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
+                  className={`px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
                     isSelected || isOpen
-                      ? 'bg-white/20 text-white font-extrabold shadow-xs ring-1 ring-white/40'
-                      : 'hover:bg-black/20 text-slate-100'
+                      ? 'bg-sky-500/20 text-sky-300 font-black border border-sky-500/40 shadow-2xs'
+                      : 'hover:bg-slate-800 text-slate-300'
                   }`}
                 >
                   <span>{category.name}</span>
-                  <span className="text-[9px] sm:text-[10px] bg-black/40 text-amber-300 font-extrabold px-1.5 py-0.2 rounded-full border border-white/20">
+                  <span className="text-[9px] bg-slate-950 text-sky-400 font-extrabold px-1.5 py-0.2 rounded-full border border-slate-700">
                     {category.count}
                   </span>
                   <ChevronDown
-                    className={`w-3 h-3 text-sky-200 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-amber-400' : ''
+                    className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-sky-400' : ''
                     }`}
                   />
                 </button>
@@ -107,13 +103,13 @@ export const RenovaCategoryNav = () => {
           </div>
 
           {/* Right RFQ Quick Link (Desktop) */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0 pl-3 border-l border-white/20">
+          <div className="hidden lg:flex items-center gap-2 shrink-0 pl-3 border-l border-slate-800">
             <button
               onClick={() => setIsQuickQuoteOpen(true)}
-              className="flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 bg-amber-400/10 px-3 py-1 rounded-lg border border-amber-400/20 whitespace-nowrap"
+              className="flex items-center gap-1.5 text-xs font-bold text-sky-400 hover:text-sky-300 bg-sky-500/10 px-3 py-1 rounded-lg border border-sky-500/20 whitespace-nowrap transition-colors"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              <span>{company.brand_name || 'Tejas'} Official RFQ</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
+              <span>Velametric Official RFQ</span>
             </button>
           </div>
 
@@ -124,20 +120,19 @@ export const RenovaCategoryNav = () => {
       {activeCategoryObj && (
         <div
           onMouseLeave={() => setActiveOpenCat(null)}
-          className="absolute top-full inset-x-0 bg-white text-slate-800 border-b-4 shadow-2xl z-50 animate-in slide-in-from-top-2 duration-150 border-t border-slate-200"
-          style={{ borderBottomColor: tokens.accent || '#fbbf24' }}
+          className="absolute top-full inset-x-0 bg-white text-slate-900 border-b-4 border-sky-400 shadow-2xl z-50 animate-in slide-in-from-top-2 duration-150 border-t border-slate-200"
         >
           <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
             
             {/* Connected Header Bar */}
             <div className="flex items-center justify-between pb-2 border-b border-slate-100">
               <div className="flex items-center gap-2.5">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: tokens.primary || '#02408f' }} />
-                <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider" style={{ color: tokens.primary || '#02408f' }}>
+                <div className="w-3 h-3 rounded-full bg-slate-900" />
+                <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900">
                   {activeCategoryObj.name}
                 </h3>
-                <span className="text-[10px] bg-amber-100 text-amber-900 font-extrabold px-2 py-0.5 rounded-md">
-                  {activeCategoryObj.count} Products Available
+                <span className="text-[10px] bg-sky-100 text-sky-900 font-extrabold px-2 py-0.5 rounded-md">
+                  {activeCategoryObj.count} Demo Items
                 </span>
               </div>
 
@@ -171,7 +166,7 @@ export const RenovaCategoryNav = () => {
                         setSelectedCategory(activeCategoryObj.id);
                         setActiveOpenCat(null);
                       }}
-                      className="w-full text-left text-xs font-semibold text-slate-800 hover:text-[#02408f] bg-sky-50/70 hover:bg-sky-100 p-2 rounded-xl transition-colors truncate"
+                      className="w-full text-left text-xs font-semibold text-slate-800 hover:text-sky-600 bg-sky-50/70 hover:bg-sky-100 p-2 rounded-xl transition-colors truncate"
                     >
                       • {sub}
                     </button>
@@ -185,7 +180,7 @@ export const RenovaCategoryNav = () => {
                   <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block">
                     Direct Equipment Shortcuts:
                   </span>
-                  <div className="max-h-40 overflow-y-auto space-y-1 pr-1 divide-y divide-slate-100">
+                  <div className="max-h-40 overflow-y-auto space-y-1 pr-1 divide-y divide-slate-100 custom-scrollbar">
                     {activeProducts.map((prod) => (
                       <button
                         key={prod.id}
@@ -195,10 +190,10 @@ export const RenovaCategoryNav = () => {
                         }}
                         className="w-full text-left pt-1.5 first:pt-0 text-xs hover:bg-sky-50 p-1.5 rounded-lg flex items-center justify-between transition-colors group/p"
                       >
-                        <span className="font-bold text-slate-800 truncate group-hover:text-[#02408f]">
+                        <span className="font-bold text-slate-800 truncate group-hover:text-sky-600">
                           {prod.name}
                         </span>
-                        <span className="text-[10px] font-extrabold shrink-0 ml-2" style={{ color: tokens.primary || '#02408f' }}>
+                        <span className="text-[10px] font-extrabold shrink-0 ml-2 text-sky-600">
                           ₹{prod.price.toLocaleString('en-IN')}
                         </span>
                       </button>
@@ -212,7 +207,7 @@ export const RenovaCategoryNav = () => {
             {/* Bottom CTA Bar */}
             <div className="pt-2 flex items-center justify-between border-t border-slate-100">
               <span className="text-[10px] text-slate-400 font-bold hidden sm:inline">
-                {company.brand_name || 'Tejas'} Verified Industrial Equipment
+                Velametric Global Demo Platform
               </span>
 
               <button
@@ -220,11 +215,10 @@ export const RenovaCategoryNav = () => {
                   setSelectedCategory(activeCategoryObj.id);
                   setActiveOpenCat(null);
                 }}
-                className="w-full sm:w-auto text-white font-bold text-xs px-5 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
-                style={{ backgroundColor: tokens.primary || '#02408f' }}
+                className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-5 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
               >
-                <span>View All {activeCategoryObj.name} Machinery</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>View All {activeCategoryObj.name} Items</span>
+                <ArrowRight className="w-3.5 h-3.5 text-sky-400" />
               </button>
             </div>
 

@@ -33,7 +33,7 @@ export const RenovaProductCard = ({ product }) => {
   const discountVal = product.discount || '20';
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-2xl hover:border-sky-400 hover:-translate-y-1.5 transition-all duration-300 flex flex-col group relative">
+    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-2xl hover:border-sky-400 hover:-translate-y-1.5 transition-all duration-300 flex flex-col group relative font-sans">
       
       {/* Product Image Container */}
       <div className="relative aspect-4/3 overflow-hidden bg-slate-100 border-b border-slate-100">
@@ -44,17 +44,17 @@ export const RenovaProductCard = ({ product }) => {
         />
 
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1">
-          <span className="bg-[#02408f] text-white font-extrabold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
-            TEJAS VERIFIED
+        <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+          <span className="bg-slate-950 text-white font-extrabold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm border border-slate-800">
+            VELAMETRIC VERIFIED
           </span>
-          <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm">
+          <span className="bg-sky-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm">
             SAVE {discountVal}%
           </span>
         </div>
 
         {/* Wishlist & Compare Buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
           <button
             onClick={() => toggleWishlist(product.id)}
             className={`p-2 rounded-full backdrop-blur-md transition-colors shadow-sm ${
@@ -69,8 +69,8 @@ export const RenovaProductCard = ({ product }) => {
             onClick={() => toggleCompare(product.id)}
             className={`p-2 rounded-full backdrop-blur-md transition-colors shadow-sm ${
               isCompared
-                ? 'bg-amber-400 text-slate-950 font-black'
-                : 'bg-slate-900/60 text-white hover:bg-amber-400 hover:text-slate-950'
+                ? 'bg-sky-400 text-slate-950 font-black'
+                : 'bg-slate-900/60 text-white hover:bg-sky-400 hover:text-slate-950'
             }`}
             title="Compare Specifications Matrix"
           >
@@ -81,9 +81,9 @@ export const RenovaProductCard = ({ product }) => {
         {/* Quick View Floating Overlay Button */}
         <button
           onClick={() => setSelectedProduct(product)}
-          className="absolute inset-x-4 bottom-3 bg-slate-950/85 hover:bg-[#02408f] text-white text-xs font-extrabold py-2 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0"
+          className="absolute inset-x-4 bottom-3 bg-slate-950/90 hover:bg-slate-900 text-white text-xs font-extrabold py-2 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0"
         >
-          <Eye className="w-3.5 h-3.5 text-amber-300" />
+          <Eye className="w-3.5 h-3.5 text-sky-400" />
           <span>Quick Technical Specs</span>
         </button>
       </div>
@@ -93,14 +93,14 @@ export const RenovaProductCard = ({ product }) => {
         
         <div>
           {/* Subcategory */}
-          <span className="text-[10px] font-extrabold text-[#02408f] uppercase tracking-wider block mb-1">
+          <span className="text-[10px] font-black text-sky-600 uppercase tracking-wider block mb-1">
             {product.subcategory || product.category}
           </span>
 
           {/* Product Title */}
           <h3
             onClick={() => setSelectedProduct(product)}
-            className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-[#02408f] transition-colors cursor-pointer leading-tight line-clamp-2"
+            className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors cursor-pointer leading-tight line-clamp-2"
           >
             {product.name}
           </h3>
@@ -124,16 +124,16 @@ export const RenovaProductCard = ({ product }) => {
             <span className="text-xs text-slate-400 line-through block leading-none">
               ₹{origPrice.toLocaleString('en-IN')}
             </span>
-            <span className="text-base font-black text-[#02408f] leading-tight">
+            <span className="text-base font-black text-slate-900 leading-tight">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
           </div>
 
           <button
             onClick={() => addToRFQ(product)}
-            className="bg-[#02408f] hover:bg-blue-900 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-colors"
+            className="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-xs transition-colors"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-300" />
+            <FileText className="w-3.5 h-3.5 text-sky-400" />
             <span>RFQ Quote</span>
           </button>
         </div>
